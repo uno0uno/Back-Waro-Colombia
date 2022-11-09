@@ -13,6 +13,9 @@ __pycache__/
 #vsCode
 .vscode/*
 
+#macbook extension
+.DS_Store
+
 # Distribution / packaging
 .Python
 build/
