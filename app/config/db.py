@@ -135,7 +135,7 @@ def update_parthner(Parthner_info_update:ParthnerInfoUpdate, id:str):
 #Retrieve Parthner info
 def get_parthner_info_bd (email:str):
     category_bdd = select_db()
-    document = category_bdd[1].find_one({"email":email})
+    document = category_bdd[1].find_one({"email":email},{"password":0})
     return json.loads(json_util.dumps(document))
 
 #Retrieve all ads Parthner email path parameter
