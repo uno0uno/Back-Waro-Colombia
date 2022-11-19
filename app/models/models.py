@@ -70,6 +70,10 @@ class ModelAd(BaseModel):  #ads generic parthner
         email:EmailStr = Field( ..., #Email Parthner
                             example="hola@warocol.com"
                             )
+        phone:int = Field(
+                    ...,#phone Parthner
+                    example=3142047013
+                    )
         img_ad: str = Field(...,
                             example="QmbFMke1KXqnYyBBWxB74N4c5SBnJMVAiMNRcGu6x1AwQH"
                             )
@@ -96,14 +100,9 @@ class ModelAd(BaseModel):  #ads generic parthner
                             example="Eventos"
                             )
 
-        tag_ads: str = Field(
-                            ...,
-                            min_length=1,
-                            max_length=30,
-                            example="Concierto en vivo" 
-                            )
+        status_ad:Optional[bool] = Field(None, example=True)
 
-        status_ad:Optional[str] = Field(None, example=True)
+        deprecated: Optional[bool] = Field(None, example=False)
 
         name_ad: str = Field(
                             ...,
@@ -123,12 +122,6 @@ class ModelAd(BaseModel):  #ads generic parthner
                             min_length=1,
                             max_length=30,
                             example="Bogotá" 
-                            )
-        country_ad: str = Field(
-                            ...,
-                            min_length=1,
-                            max_length=30,
-                            example="Colombia" 
                             )
         hood_ad: str = Field(
                             ...,

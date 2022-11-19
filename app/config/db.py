@@ -38,7 +38,7 @@ from app.auth.hash_class import Hasher
 #Retrieve all ads category Body Request
 def fetch_all_category_ads(category_:str):
     category = select_db()
-    document = category[0].find({"category":category_},{"name_ad":1,"deadline_ad":1, "city_ad":1, "id_ad":1, "img_ad":1, "off_price":1})
+    document = category[0].find({"category":category_,"status_ad":True},{"name_ad":1,"deadline_ad":1, "city_ad":1, "id_ad":1, "img_ad":1, "off_price":1})
     return json.loads(json_util.dumps(document))
 
 #Retrieve an ad using ID PATH PARAMETER
@@ -97,7 +97,7 @@ def update_product_bd(
 def remove_product(id:str,uuid:str):
     Validator.is_valid(id)
     category_bdd = select_db()
-    category_bdd[0].delete_one({"id_ad":uuid})
+    category_bdd[0].update_one({"id_ad":uuid},{"$set":{"deprecated":True}})
     category_bdd[1].update_one({'_id':bson.ObjectId(id)},{"$pull":{"ads":uuid}})
     return True
 
@@ -143,7 +143,7 @@ def get_parthner_info_bd (email:str):
 #Retrieve all ads Parthner email path parameter
 def fetch_all_ads_parthner(email:str):
     category = select_db()
-    document = category[0].find({"email":email})
+    document = category[0].find({"email":email, "deprecated":False})
     return json.loads(json_util.dumps(document))
 
 #Delete a product, Integrate to category ads
