@@ -1,5 +1,4 @@
 #FastAPI
-from ast import Return
 from fastapi import HTTPException
 
 #MondoDB Drivers
@@ -24,8 +23,6 @@ import requests
 from app.config.config import PROJECT_ID_INFURA
 from app.config.config import PROJECT_SECRET_INFURA
 from app.config.config import END_POINT_INFURA
-
-from starlette.background import BackgroundTask
 
 # ============================================================
 # Conection with de Database
@@ -57,8 +54,6 @@ def Validator_email(plain_email, email_bd):
 
 def infura_file(img_ad:UploadFile):
         files = {'file': img_ad.file}           
-        # if len(img_ad.file.read()) > 10000000:
-        #     raise HTTPException(409,"File size not allowed")
         if img_ad.content_type not in ["image/png", "image/jpg", "image/jpeg"]:
             raise HTTPException(409,"File extension not allowed")
         response = requests.post(END_POINT_INFURA + '/api/v0/add', files=files, auth=(PROJECT_ID_INFURA, PROJECT_SECRET_INFURA))

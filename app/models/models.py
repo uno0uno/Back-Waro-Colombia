@@ -130,3 +130,15 @@ class ModelAd(BaseModel):  #ads generic parthner
                             example="Ciudad Bolivar" 
                             )
 
+class Payments(BaseModel):
+        title:str = Field( ..., #Name Product
+                            example="My product"
+                            )
+        quantity:int = Field( ..., # products
+                            example="1"
+                            )
+        unit_price:int = Field( ..., # 75.76
+                            example="1"
+                            )                    
+
+
