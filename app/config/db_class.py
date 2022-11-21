@@ -4,9 +4,6 @@ from fastapi import HTTPException
 #MondoDB Drivers
 from pymongo import MongoClient
 
-#Certidy SSL (Mac set)  
-import certifi
-
 # env configuration
 from app.config.config import settings
 
@@ -28,7 +25,7 @@ from app.config.config import END_POINT_INFURA
 # Conection with de Database
 # ============================================================
 
-client = MongoClient(settings.URL_CLUSTER_MONGO_DB,tlsCAFile=certifi.where())
+client = MongoClient(settings.URL_CLUSTER_MONGO_DB)
 
 class Validator(object):
     def __init__(self) -> None:
