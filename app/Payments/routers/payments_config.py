@@ -19,10 +19,18 @@ def preference_data_merlina(payments:Payments):
         "items": [
             {
                 "title": payments.title,
+                "currency_id": payments.currency_id,
+                "description": payments.description,
                 "quantity": payments.quantity,
                 "unit_price": payments.unit_price,
             }
-        ]
+        ],
+        "back_urls": 
+            {
+            "success": "http://127.0.0.1:5173/#/parthner/"+payments.email+"/bill",
+            "failure": "http://127.0.0.1:5173/#/parthner/"+payments.email+"/bill",
+            "pending": "http://127.0.0.1:5173/#/parthner/"+payments.email+"/bill"
+            }
     }
 
     preference_response = sdk.preference().create(preference_data)

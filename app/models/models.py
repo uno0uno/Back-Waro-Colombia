@@ -1,5 +1,6 @@
 #Python
 from typing import Optional
+from importlib_metadata import email
 
 #Pydantic
 from pydantic import BaseModel
@@ -134,11 +135,20 @@ class Payments(BaseModel):
         title:str = Field( ..., #Name Product
                             example="My product"
                             )
-        quantity:int = Field( ..., # products
+        currency_id:str = Field( ..., #Currency Payment
+                            example="COP"
+                            )
+        description:str = Field( ..., #Description Product
+                            example="description product"
+                            )
+        quantity:int = Field( ..., #Quantity products
                             example="1"
                             )
-        unit_price:int = Field( ..., # 75.76
-                            example="1"
-                            )                    
+        unit_price:int = Field( ..., #Amount 10000
+                            example="10000"
+                            )   
+        email:EmailStr = Field( ..., #Email Parthner
+                            example="hola@warocol.com"
+                            )                
 
 
