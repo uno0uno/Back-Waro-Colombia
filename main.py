@@ -28,7 +28,7 @@ app.include_router(payment_router_app)
 origins = [
     "https://www.warocol.com/#/",
     "https://warocol.com/#/",
-    "https://.warocol.com/",
+    "https://warocol.com/",
     "https://www.warocol.com/",
 ]
 
