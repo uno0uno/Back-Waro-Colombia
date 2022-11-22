@@ -30,6 +30,7 @@ origins = [
     "https://warocol.com/#",
     "https://warocol.com",
     "https://www.warocol.com",
+    "http://127.0.0.1:5173"
 ]
 
 app.add_middleware(
