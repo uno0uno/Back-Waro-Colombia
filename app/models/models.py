@@ -27,27 +27,6 @@ class ParthnerLogin(BaseModel): #Login parthner
 
 class ParthnerInfoUpdate(ParthnerLogin):  #Info Parthner
    
-    street:str = Field(
-                    ...,  #Stees Parthner 
-                    min_length=8,
-                    max_length=64,
-                    example="Calle 39 f # 68 f 66 Sur"
-                    )
-
-    city:str = Field(
-                    ..., #City Parthner
-                    min_length=4,
-                    max_length=14,
-                    example="Bogotá"
-                    )
-
-    neighborhood:str = Field(
-                        ..., #Hood Parthner
-                        min_length=6,
-                        max_length=64,
-                        example="Talavera de la reina"
-                        )  
-
     phone:int = Field(
                     ...,#phone Parthner
                     example=3142047013
@@ -66,6 +45,8 @@ class ParthnerInfo(ParthnerInfoUpdate):  #Info Parthner
     ads:Optional[list] = None
     
     files:Optional[list] = None
+    
+    payments:Optional[list] = None
 
 class ModelAd(BaseModel):  #ads generic parthner
         email:EmailStr = Field( ..., #Email Parthner
