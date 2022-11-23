@@ -20,8 +20,6 @@ import json
 #Function db
 from app.config.db_class import select_db
 from app.config.db_class import Validator
-from app.config.db_class import infura_file
-from app.config.db_class import infura_fire_delete
 
 #Creation token JWT
 from app.auth.jwt_handler import signJWT
@@ -47,25 +45,6 @@ def fetch_one_ad( _id1:str):
     category = select_db()
     document = category[0].find_one({"_id":bson.ObjectId(_id1)})
     return json.loads(json_util.dumps(document))
-
-# =============================================
-# Parthner functions. Upload file and delete
-# =============================================
-
-#Upload file, generate hash and push to parthner
-def upload_a_photo_product_bd(img_ad:UploadFile, id_parthner:str):
-    Validator.is_valid(id_parthner)
-    category_bdd = select_db()
-    hash = infura_file(img_ad)
-    category_bdd[1].update_one({"_id":bson.ObjectId(id_parthner)},{"$addToSet":{"files":hash}})
-    return hash
-
-def remove_file_bd(id:str,hash:str):
-    Validator.is_valid(id)
-    category_bdd = select_db()
-    response = infura_fire_delete(hash)
-    category_bdd[1].update_one({'_id':bson.ObjectId(id)},{"$pull":{"files":hash}})
-    return response
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Products functions. Post, update and delete

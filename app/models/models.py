@@ -75,9 +75,6 @@ class ModelAd(BaseModel):  #ads generic parthner
                     ...,#phone Parthner
                     example=3142047013
                     )
-        img_ad: str = Field(...,
-                            example="QmbFMke1KXqnYyBBWxB74N4c5SBnJMVAiMNRcGu6x1AwQH"
-                            )
         full_price: int = Field(
                                 ...,
                                 example=50000

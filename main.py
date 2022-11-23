@@ -8,7 +8,6 @@ from fastapi.middleware.cors import CORSMiddleware #different "origins"
 from app.parthner.routers.parthner_router import parthner_router_app
 from app.users.routers.user_router import user_router_app
 from app.Product.routers.products import product_router_app
-from app.upload_file.upload_file import upload_file_app
 from app.Payments.routers.payments_router import payment_router_app
 
 import uvicorn
@@ -18,7 +17,6 @@ app = FastAPI()
 app.include_router(user_router_app)
 app.include_router(parthner_router_app) 
 app.include_router(product_router_app)
-app.include_router(upload_file_app)
 app.include_router(payment_router_app)
 
 # ============================================================
