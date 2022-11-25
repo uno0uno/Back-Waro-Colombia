@@ -28,9 +28,9 @@ def preference_data_merlina(payments:Payments):
         ],
         "back_urls": 
             {
-            "success": "http://127.0.0.1:5173/#/parthner/"+payments.email+"/bill",
-            "failure": "http://127.0.0.1:5173/#/parthner/"+payments.email+"/bill",
-            "pending": "http://127.0.0.1:5173/#/parthner/"+payments.email+"/bill"
+            "success": "https://www.warocol.com/#/parthner/"+payments.email+"/bill",
+            "failure": "https://www.warocol.com/#/parthner/"+payments.email+"/bill",
+            "pending": "https://www.warocol.com/#/parthner/"+payments.email+"/bill"
             },
         "auto_return": "approved",
         "statement_descriptor": "Waro Colombia"
