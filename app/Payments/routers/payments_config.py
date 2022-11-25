@@ -18,6 +18,7 @@ def preference_data_merlina(payments:Payments):
     preference_data = {
         "items": [
             {
+                "id": "p1",
                 "title": payments.title,
                 "currency_id": payments.currency_id,
                 "description": payments.description,
@@ -31,7 +32,8 @@ def preference_data_merlina(payments:Payments):
             "failure": "http://127.0.0.1:5173/#/parthner/"+payments.email+"/bill",
             "pending": "http://127.0.0.1:5173/#/parthner/"+payments.email+"/bill"
             },
-        "auto_return": "approved"
+        "auto_return": "approved",
+        "statement_descriptor": "Waro Colombia"
     }
 
     preference_response = sdk.preference().create(preference_data)
