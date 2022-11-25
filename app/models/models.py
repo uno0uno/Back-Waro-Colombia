@@ -47,6 +47,9 @@ class ParthnerInfo(ParthnerInfoUpdate):  #Info Parthner
     files:Optional[list] = None
     
     payments:Optional[list] = None
+    
+    songs:Optional[list] = None
+
 
 class ModelAd(BaseModel):  #ads generic parthner
         email:EmailStr = Field( ..., #Email Parthner
