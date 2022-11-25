@@ -66,7 +66,7 @@ class ModelAd(BaseModel):  #ads public generic parthner
 
         description: str = Field(
                             ...,
-                            max_length=360,
+                            max_length=500,
                             min_length=1,
                             example="Esta es una descripcion corte del producto "
                             )
