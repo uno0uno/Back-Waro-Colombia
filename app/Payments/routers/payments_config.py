@@ -30,7 +30,8 @@ def preference_data_merlina(payments:Payments):
             "success": "http://127.0.0.1:5173/#/parthner/"+payments.email+"/bill",
             "failure": "http://127.0.0.1:5173/#/parthner/"+payments.email+"/bill",
             "pending": "http://127.0.0.1:5173/#/parthner/"+payments.email+"/bill"
-            }
+            },
+        "auto_return": "approved"
     }
 
     preference_response = sdk.preference().create(preference_data)
