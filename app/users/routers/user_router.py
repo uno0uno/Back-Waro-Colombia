@@ -6,7 +6,7 @@ from fastapi import FastAPI, APIRouter, status, HTTPException
 from fastapi import Body, Query, Path, Form, Header, Cookie, UploadFile, File
 
 #DataBase encoders
-from app.config.db import fetch_one_ad,fetch_all_category_ads
+from app.config.db import fetch_one_ad,fetch_all_category_ads,fetch_one_song
 
 
 # ============================================================
@@ -37,7 +37,7 @@ def get_ad(
         raise HTTPException(404,"Not found")
 
 
-# Get a product from category
+# Get a product from category using id
 # ==========================
 @user_router_app.get(
         "/getad/{_id1}",
@@ -51,3 +51,19 @@ def get_ads(
         if response:
             return response
         raise HTTPException(404,"Not found")
+
+# Get a song from category using Object Id
+# ==========================
+@user_router_app.get(
+        "/getsong/{id}",
+        status_code=status.HTTP_200_OK,
+        summary="Single song"  
+        )
+def get_song(
+        id:str = Path(...,example="63810b0569f2c6a4b77948f3", description="Object _id Song")
+        ):
+        response = fetch_one_song(id) 
+        if response:
+            return response
+        raise HTTPException(404,"Not found")
+

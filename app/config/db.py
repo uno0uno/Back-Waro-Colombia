@@ -12,6 +12,7 @@ from app.models.models import ParthnerLogin
 from app.models.models import ParthnerInfoUpdate
 from app.models.models import ParthnerInfo
 from app.models.models import ModelAd
+from app.models.models import ModelSong
 
 #Dump the loaded BSON to valid JSON
 from bson import json_util
@@ -39,11 +40,18 @@ def fetch_all_category_ads(category_:str):
     document = category[0].find({"category":category_,"status_ad":True,"deprecated":False},{"name_ad":1,"deadline_ad":1, "city_ad":1, "id_ad":1, "hood_ad":1, "city_ad":1, "description":1, "off_price":1})
     return json.loads(json_util.dumps(document))
 
-#Retrieve an ad using ID PATH PARAMETER
+#Retrieve an ad using ID AD USING PATH PARAMETER
 def fetch_one_ad( _id1:str):
     Validator.is_valid(_id1)
     category = select_db()
     document = category[0].find_one({"_id":bson.ObjectId(_id1)})
+    return json.loads(json_util.dumps(document))
+
+#Retrieve an ad using ID SONG USING PATH PARAMETER
+def fetch_one_song(id:str):
+    Validator.is_valid(id)
+    category = select_db()
+    document = category[2].find_one({"_id":bson.ObjectId(id)})
     return json.loads(json_util.dumps(document))
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
@@ -79,6 +87,24 @@ def remove_product(id:str,uuid:str):
     category_bdd[0].update_one({"id_ad":uuid},{"$set":{"deprecated":True,"status_ad":False}})
     category_bdd[1].update_one({'_id':bson.ObjectId(id)},{"$pull":{"ads":uuid}})
     return True
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Songs functions. Post, update and delete
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+#Post a product, generate an uuid and push to parthner and products
+def create_song_and_ad_category(model_song:ModelSong,
+                                        id_parthner:str
+                                        ):
+    Validator.is_valid(id_parthner)
+    category_bdd = select_db()
+    is_song = str(uuid.uuid4())
+    model_song["id_ad"] = is_song
+    category_bdd[2].insert_one(dict(model_song)) #add to products
+    category_bdd[1].update_one({"_id":bson.ObjectId(id_parthner)},{"$push":{"songs":is_song}}) # add to ads category
+    return model_song
+
+
 
 # =============================================
 # Parthner functions. Create and update ACCOUNT

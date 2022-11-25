@@ -41,7 +41,8 @@ def select_db():
     __category = "MagicV1"
     products = client.products[__category]
     parthner = client.parthner[__category]
-    return [products, parthner]
+    songs = client.songs[__category]
+    return [products, parthner, songs]
 
 def Validator_email(plain_email, email_bd):
     if plain_email != email_bd : 

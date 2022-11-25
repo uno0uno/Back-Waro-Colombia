@@ -24,7 +24,6 @@ class ParthnerLogin(BaseModel): #Login parthner
                         max_length=64,
                         example='password',
                         )
-
 class ParthnerInfoUpdate(ParthnerLogin):  #Info Parthner
    
     phone:int = Field(
@@ -40,7 +39,6 @@ class ParthnerInfoUpdate(ParthnerLogin):  #Info Parthner
                         )
 
     status_parthner:Optional[bool] = Field(None, example=True) 
-
 class ParthnerInfo(ParthnerInfoUpdate):  #Info Parthner
     ads:Optional[list] = None
     
@@ -49,9 +47,7 @@ class ParthnerInfo(ParthnerInfoUpdate):  #Info Parthner
     payments:Optional[list] = None
     
     songs:Optional[list] = None
-
-
-class ModelAd(BaseModel):  #ads generic parthner
+class ModelAd(BaseModel):  #ads public generic parthner
         email:EmailStr = Field( ..., #Email Parthner
                             example="hola@warocol.com"
                             )
@@ -111,7 +107,6 @@ class ModelAd(BaseModel):  #ads generic parthner
                             max_length=30,
                             example="Ciudad Bolivar" 
                             )
-
 class Payments(BaseModel):
         title:str = Field( ..., #Name Product
                             example="My product"
@@ -131,5 +126,82 @@ class Payments(BaseModel):
         email:EmailStr = Field( ..., #Email Parthner
                             example="hola@warocol.com"
                             )                
+class ModelSong(BaseModel):  #ads public generic parthner
+        
+        songHash: str = Field(
+                            ...,
+                            max_length=360,
+                            min_length=1,
+                            example="Qmb5p6W7o3BXecXM8dvW8ExhUgJqnUf7QWfDjGdK398RiD"
+                            )
+        imgHash: str = Field(
+                            ...,
+                            max_length=360,
+                            min_length=1,
+                            example="QmUhkW4mEaJyGWqVvBSrBXEp1ZzSDi548xcADWpn4S2GhP"
+                            )
+
+        nameSong: str = Field(
+                            ...,
+                            max_length=360,
+                            min_length=1,
+                            example="La Junta"
+                            )
+
+        nameArtist: str = Field(
+                            ...,
+                            min_length=1,
+                            max_length=30, 
+                            example="Tres Coronas"
+                            )
+        
+        genre: str = Field(
+                            ...,
+                            min_length=1,
+                            max_length=30, 
+                            example="Hip-Hop"
+                            )
+                                    
+        city: str = Field(
+                            ...,
+                            min_length=1,
+                            max_length=30, 
+                            example="Bogotá"
+                            )
+                                    
+        country: str = Field(
+                            ...,
+                            min_length=1,
+                            max_length=30, 
+                            example="Colombia"
+                            )
+        dowlandType: str = Field(
+                            ...,
+                            min_length=1,
+                            max_length=30, 
+                            example="Descarga gratis"
+                            )
+        dowlands:int = Field(
+                    ...,#phone Parthner
+                    example=0
+                    )
+        play:int = Field(
+                    ...,#phone Parthner
+                    example=0
+                    )
+
+        status_ad:Optional[bool] = Field(None, example=False)
+
+        deprecated: Optional[bool] = Field(None, example=False)
+
+        ONErpm:str = Field(
+                    ...,#phone Parthner
+                    example="https://onerpm.link/LaJunta"
+                    )
+        youtube:str = Field(
+                    ...,#phone Parthner
+                    example="https://youtu.be/e8XrZ3g0qfY"
+                    )
+        
 
 
