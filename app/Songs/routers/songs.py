@@ -7,6 +7,7 @@ from pydantic import Field
 from app.config.db import create_song_and_ad_category
 from app.config.db import create_product_and_ad_category
 from app.config.db import remove_product,update_product_bd
+from app.config.db import new_dowland_song_db
 
 #Models app Waro Colombia(Internal)
 from app.models.models import ModelSong
@@ -39,6 +40,23 @@ def post_song(
                     id_parthner:str = Path(...,example="63543c1f1099e408d2c4e435", description="Object _id Parthner")
                     ):
     response = create_song_and_ad_category(model_song.dict(),id_parthner) 
+    if response:
+        return response
+    raise HTTPException(404,"Not found")
+
+# New Dowland song 
+# ===============
+@songs_router_app.post(
+    "/dowlands/{id_song}",
+    status_code=status.HTTP_201_CREATED,
+    tags=["Parthner songs"],
+    summary="New Dowland song"  
+    ) 
+def new_dowland_song(
+    id_song:str = Path(...,example="63543c1f1099e408d2c4e435", description="Object _id Song"),
+    number_dowlands:int = Query(...,example="10", description="Number dowlands")
+    ):
+    response = new_dowland_song_db(id_song,number_dowlands) 
     if response:
         return response
     raise HTTPException(404,"Not found")

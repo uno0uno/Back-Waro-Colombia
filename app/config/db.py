@@ -104,6 +104,13 @@ def create_song_and_ad_category(model_song:ModelSong,
     category_bdd[1].update_one({"_id":bson.ObjectId(id_parthner)},{"$push":{"songs":is_song}}) # add to ads category
     return model_song
 
+#Post a product, generate an uuid and push to parthner and products
+def new_dowland_song_db(id_song:str, number_dowlands:int):
+
+    Validator.is_valid(id_song)
+    category_bdd = select_db()
+    category_bdd[2].update_one({"_id":bson.ObjectId(id_song)},{"$set":{"dowlands":number_dowlands}}) # add to ads category
+    return "ok"
 
 
 # =============================================
