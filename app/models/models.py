@@ -52,9 +52,13 @@ class ModelAd(BaseModel):  #ads public generic parthner
                             example="hola@warocol.com"
                             )
         phone:int = Field(
-                    ...,#phone Parthner
-                    example=3142047013
-                    )
+                            ...,#phone Parthner
+                            example=3142047013
+                            )
+        link_contact:Optional[int] = Field(
+                            None,#phone Parthner
+                            example="https://chat.whatsapp.com/EED536nR8Et2Nh0DCRDsGs"
+                            )
         full_price: int = Field(
                                 ...,
                                 example=50000
@@ -66,7 +70,7 @@ class ModelAd(BaseModel):  #ads public generic parthner
 
         description: str = Field(
                             ...,
-                            max_length=500,
+                            max_length=1000,
                             min_length=1,
                             example="Esta es una descripcion corte del producto "
                             )
