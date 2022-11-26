@@ -8,6 +8,7 @@ from app.config.db import create_song_and_ad_category
 from app.config.db import create_product_and_ad_category
 from app.config.db import remove_product,update_product_bd
 from app.config.db import new_dowland_song_db
+from app.config.db import new_play_song_db
 
 #Models app Waro Colombia(Internal)
 from app.models.models import ModelSong
@@ -57,6 +58,23 @@ def new_dowland_song(
     number_dowlands:int = Query(...,example="10", description="Number dowlands")
     ):
     response = new_dowland_song_db(id_song,number_dowlands) 
+    if response:
+        return response
+    raise HTTPException(404,"Not found")
+
+# New Play song 
+# ===============
+@songs_router_app.post(
+    "/play/{id_song}",
+    status_code=status.HTTP_201_CREATED,
+    tags=["Parthner songs"],
+    summary="New play song"  
+    ) 
+def new_play_song(
+    id_song:str = Path(...,example="63543c1f1099e408d2c4e435", description="Object _id Song"),
+    number_plays:int = Query(...,example="10", description="Number plays")
+    ):
+    response = new_play_song_db(id_song,number_plays) 
     if response:
         return response
     raise HTTPException(404,"Not found")
