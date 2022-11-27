@@ -27,7 +27,7 @@ songs_router_app = APIRouter(
 # Path operations Products
 # ============================================================
 
-# Post a product 
+# Post a song 
 # ===============
 @songs_router_app.post(
     "/{id_parthner}",

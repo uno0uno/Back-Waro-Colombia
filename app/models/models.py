@@ -208,6 +208,12 @@ class ModelSong(BaseModel):  #ads public generic parthner
                     ...,#phone Parthner
                     example="https://youtu.be/e8XrZ3g0qfY"
                     )
+        description: str = Field(
+                            ...,
+                            max_length=1000,
+                            min_length=1,
+                            example="Esta es una descripcion corte del producto "
+                            )
         
 
 
