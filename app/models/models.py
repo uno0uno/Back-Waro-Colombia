@@ -65,11 +65,6 @@ class ModelAd(BaseModel):  #ads public generic parthner
                                 ...,
                                 example=50000
                                 )
-
-        off_price : int = Field(...,
-                                example=30
-                                )
-
         description: str = Field(
                             ...,
                             max_length=1000,
@@ -112,6 +107,10 @@ class ModelAd(BaseModel):  #ads public generic parthner
                             min_length=1,
                             max_length=30,
                             example="Ciudad Bolivar" 
+                            )
+
+        artist:Optional[list] = Field( None, #artist
+                            example=["Dj Cas", "Tres Coronas", "La Ettnia"]
                             )
 class Payments(BaseModel):
         title:str = Field( ..., #Name Product
