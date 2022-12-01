@@ -26,11 +26,10 @@ app.include_router(songs_router_app)
 # ============================================================
 
 origins = [
-    "https://www.warocol.com/#",
-    "https://warocol.com/#",
-    "https://warocol.com",
     "https://www.warocol.com",
-    "http://127.0.0.1:5173"
+    "https://warocol.com",
+    "http://127.0.0.1:5173",
+    "http://139.95.1.121"
 ]
 
 app.add_middleware(
