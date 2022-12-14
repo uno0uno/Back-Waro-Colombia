@@ -7,7 +7,6 @@ from app.config.db import check_parther
 from app.config.db import create_parthner
 from app.config.db import fetch_all_ads_parthner
 from app.config.db import update_parthner
-from app.config.db import remove_parthner_bd
 from app.config.db import get_parthner_info_bd
 
 #Models app Waro Colombia(Internal)
@@ -121,27 +120,4 @@ def get_parthner_info(
         return response
     raise HTTPException(404,"Not found")
 
-# Delete a parthner
-# ================
-@parthner_router_app.delete(
-    "/{id}",
-    status_code=status.HTTP_200_OK,
-    dependencies=[Depends(JWTBearer())],
-    tags=["Parthner bussines"],
-    summary="Delete Parthner and ads"
-    ) 
-def remove_parthner(
-            id:str = Path(...,
-            example="63543e411099e408d2c4e439",
-            description="Object _id Pathner"),
-
-            email:str = Query(...,
-            example="hola@warocol.com",
-            description="Email bussines")
-            ):
-
-    response = remove_parthner_bd(id,email)
-    if response:
-        return "Deleted"
-    raise HTTPException(404,"Not found")
 

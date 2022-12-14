@@ -5,7 +5,7 @@ from pydantic import Field
 
 #DataBase encoders
 from app.config.db import create_product_and_ad_category
-from app.config.db import remove_product,update_product_bd
+from app.config.db import remove_product
 
 #Models app Waro Colombia(Internal)
 from app.models.models import ModelAd
@@ -41,26 +41,7 @@ def post_product(
     if response:
         return response
     raise HTTPException(404,"Not found")
-
-# Updates a product 
-# ===============
-@product_router_app.put(
-                        "/{id}",
-                        status_code=status.HTTP_201_CREATED,
-                        dependencies=[Depends(JWTBearer())],
-                        tags=["Parthner products"],
-                        summary="Update a Single ad"  
-                        )
-def update_product(
-                        model_ad:ModelAd,
-                        id:str = Path(...,example="63543c1f1099e408d2c4e435", description="Id ad")
-                        ):
-    response = update_product_bd(model_ad.dict(),id)
-    if response:
-        return "updated"
-    raise HTTPException(404,"Not found")
-
-
+    
 # Delete a product 
 # ================
 @product_router_app.delete(

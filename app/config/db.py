@@ -70,16 +70,6 @@ def create_product_and_ad_category(model_ad:ModelAd,
     category_bdd[1].update_one({"_id":bson.ObjectId(id_parthner)},{"$push":{"ads":is_ad}}) # add to ads category
     return model_ad
 
-#Update a product 
-def update_product_bd(
-                    model_ad:ModelAd,
-                    id:str
-                    ):
-    Validator.is_valid(id)
-    category_bdd = select_db()
-    category_bdd[0].update_one({'_id':bson.ObjectId(id)},{"$set":dict(model_ad)})
-    return True
-
 #Delete a product, Integrate to category ads
 def remove_product(id:str,uuid:str):
     Validator.is_valid(id)
@@ -166,11 +156,4 @@ def fetch_all_ads_parthner(email:str):
     document = category[0].find({"email":email, "deprecated":False})
     return json.loads(json_util.dumps(document))
 
-#Delete a product, Integrate to category ads
-def remove_parthner_bd(id:str,email:str):
-    Validator.is_valid(id)
-    category_bdd = select_db()
-    category_bdd[0].delete_many({"email":email})
-    category_bdd[1].delete_one({'_id':bson.ObjectId(id)})
-    return True
 

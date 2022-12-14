@@ -6,7 +6,7 @@ from pydantic import Field
 #DataBase encoders
 from app.config.db import create_song_and_ad_category
 from app.config.db import create_product_and_ad_category
-from app.config.db import remove_product,update_product_bd
+from app.config.db import remove_product
 from app.config.db import new_dowland_song_db
 from app.config.db import new_play_song_db
 
