@@ -108,6 +108,13 @@ class ModelAd(BaseModel):  #ads public generic parthner
         artist:Optional[list] = Field( None, #artist
                             example=["Dj Cas", "Tres Coronas", "La Ettnia"]
                             )
+                            
+        imgHash: str = Field(
+                            ...,
+                            max_length=360,
+                            min_length=1,
+                            example="QmUhkW4mEaJyGWqVvBSrBXEp1ZzSDi548xcADWpn4S2GhP"
+                            )
 class Payments(BaseModel): #payments public generic parthner
         title:str = Field( ..., #Name Product
                             example="My product"
