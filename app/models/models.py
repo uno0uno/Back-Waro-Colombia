@@ -41,19 +41,15 @@ class ParthnerInfoUpdate(ParthnerLogin):  #Info Parthner
     status_parthner:Optional[bool] = Field(None, example=True) 
 class ParthnerInfo(ParthnerInfoUpdate):  #Info Parthner
     ads:Optional[list] = None
-    
-    files:Optional[list] = None
-    
+
     payments:Optional[list] = None
     
     songs:Optional[list] = None
+
+    garage:Optional[list] = None
 class ModelAd(BaseModel):  #ads public generic parthner
         email:EmailStr = Field( ..., #Email Parthner
                             example="hola@warocol.com"
-                            )
-        phone:int = Field(
-                            ...,#phone Parthner
-                            example=3142047013
                             )
         link_contact:Optional[str] = Field(
                             None,#phone Parthner
@@ -112,7 +108,7 @@ class ModelAd(BaseModel):  #ads public generic parthner
         artist:Optional[list] = Field( None, #artist
                             example=["Dj Cas", "Tres Coronas", "La Ettnia"]
                             )
-class Payments(BaseModel):
+class Payments(BaseModel): #payments public generic parthner
         title:str = Field( ..., #Name Product
                             example="My product"
                             )
@@ -131,7 +127,8 @@ class Payments(BaseModel):
         email:EmailStr = Field( ..., #Email Parthner
                             example="hola@warocol.com"
                             )                
-class ModelSong(BaseModel):  #ads public generic parthner
+
+class ModelSong(BaseModel):  #song public generic parthner
         
         songHash: str = Field(
                             ...,
@@ -207,6 +204,40 @@ class ModelSong(BaseModel):  #ads public generic parthner
                     ...,#phone Parthner
                     example="https://youtu.be/e8XrZ3g0qfY"
                     )
+        description: str = Field(
+                            ...,
+                            max_length=1000,
+                            min_length=1,
+                            example="Esta es una descripcion corte del producto "
+                            )        
+class ModelGarage(BaseModel):  #garage public generic parthner
+        full_price: int = Field(
+                                ...,
+                                example=50000
+                                )
+        genre: str = Field(
+                            ...,
+                            min_length=1,
+                            max_length=30, 
+                            example="Hip-Hop"
+                            )
+                                    
+        city_ad: str = Field(
+                            ...,
+                            min_length=1,
+                            max_length=30,
+                            example="Bogotá" 
+                            )
+        hood_ad: str = Field(
+                            ...,
+                            min_length=1,
+                            max_length=30,
+                            example="Ciudad Bolivar" 
+                            )
+        status_ad:Optional[bool] = Field(None, example=False)
+
+        deprecated: Optional[bool] = Field(None, example=False)
+
         description: str = Field(
                             ...,
                             max_length=1000,
