@@ -17,7 +17,7 @@ from app.auth.jwt_bearer import JWTBearer
 # Definitions Router:
 
 product_router_app = APIRouter(
-    prefix="/product"  
+    prefix="/event"  
 )
 
 # ============================================================
@@ -31,7 +31,7 @@ product_router_app = APIRouter(
     status_code=status.HTTP_201_CREATED,
     dependencies=[Depends(JWTBearer())],
     tags=["Parthner products"],
-    summary="Post single ad"  
+    summary="Post an event"  
     ) 
 def post_product(
                     model_ad:ModelAd,
@@ -49,7 +49,7 @@ def post_product(
     status_code=status.HTTP_200_OK,
     dependencies=[Depends(JWTBearer())],
     tags=["Parthner products"],
-    summary="Delete ad"
+    summary="Delete event"
     ) 
 def delete_product(
                         id:str = Path(...,example="63543e411099e408d2c4e439", description="Object _id Pathner"),
