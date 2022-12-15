@@ -259,4 +259,8 @@ class ModelGarage(BaseModel):  #garage public generic parthner
                         min_length=1,
                         example="QmUhkW4mEaJyGWqVvBSrBXEp1ZzSDi548xcADWpn4S2GhP"
                         )
+    shipping:Optional[int] = Field(
+                            None,#phone Parthner
+                            example="7000"
+                            )
 
