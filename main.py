@@ -9,6 +9,7 @@ from app.parthner.routers.parthner_router import parthner_router_app
 from app.users.routers.user_router import user_router_app
 from app.Event.routers.Events import event_router_app
 from app.Songs.routers.songs import songs_router_app
+from app.garage.garage_router import garage_router_app
 
 import uvicorn
 
@@ -18,6 +19,7 @@ app.include_router(user_router_app)
 app.include_router(parthner_router_app) 
 app.include_router(event_router_app)
 app.include_router(songs_router_app)
+app.include_router(garage_router_app)
 
 # ============================================================
 # MIDDLEWARE TO CONECT

@@ -170,19 +170,6 @@ class ModelSong(BaseModel):  #song public generic parthner
                             example="Hip-Hop"
                             )
                                     
-        city: str = Field(
-                            ...,
-                            min_length=1,
-                            max_length=30, 
-                            example="Bogotá"
-                            )
-                                    
-        country: str = Field(
-                            ...,
-                            min_length=1,
-                            max_length=30, 
-                            example="Colombia"
-                            )
         dowlandType: str = Field(
                             ...,
                             min_length=1,
@@ -217,39 +204,59 @@ class ModelSong(BaseModel):  #song public generic parthner
                             example="Esta es una descripcion corte del producto "
                             )        
 class ModelGarage(BaseModel):  #garage public generic parthner
-        full_price: int = Field(
-                                ...,
-                                example=50000
-                                )
-        genre: str = Field(
-                            ...,
-                            min_length=1,
-                            max_length=30, 
-                            example="Hip-Hop"
+    email:EmailStr = Field( ..., #Email Parthner
+                            example="hola@warocol.com"
                             )
-                                    
-        city_ad: str = Field(
+    full_price: int = Field(
                             ...,
-                            min_length=1,
-                            max_length=30,
-                            example="Bogotá" 
+                            example=50000
                             )
-        hood_ad: str = Field(
-                            ...,
-                            min_length=1,
-                            max_length=30,
-                            example="Ciudad Bolivar" 
-                            )
-        status_ad:Optional[bool] = Field(None, example=False)
-
-        deprecated: Optional[bool] = Field(None, example=False)
-
-        description: str = Field(
+    description: str = Field(
                             ...,
                             max_length=1000,
                             min_length=1,
                             example="Esta es una descripcion corte del producto "
                             )
-        
 
+    category: str = Field(
+                        ...,
+                        min_length=1,
+                        max_length=30, 
+                        example="Eventos"
+                        )
+
+    status_ad:Optional[bool] = Field(None, example=True)
+
+    deprecated: Optional[bool] = Field(None, example=False)
+
+    name_ad: str = Field(
+                        ...,
+                        min_length=1,
+                        max_length=90,
+                        example="Sonidero Bogotano" 
+                        )
+    name_business:str = Field(
+                        ..., #Name Bussines required
+                        min_length=1,
+                        max_length=30,
+                        example="Waro Colombia"
+                        )
+    city_ad: str = Field(
+                        ...,
+                        min_length=1,
+                        max_length=30,
+                        example="Bogotá" 
+                        )
+    hood_ad: str = Field(
+                        ...,
+                        min_length=1,
+                        max_length=30,
+                        example="Ciudad Bolivar" 
+                        )
+    imgHash: str = Field(
+                        ...,
+                        max_length=360,
+                        min_length=1,
+                        example="QmUhkW4mEaJyGWqVvBSrBXEp1ZzSDi548xcADWpn4S2GhP"
+                        )
 

@@ -13,6 +13,7 @@ from app.models.models import ParthnerInfoUpdate
 from app.models.models import ParthnerInfo
 from app.models.models import ModelAd
 from app.models.models import ModelSong
+from app.models.models import ModelGarage
 
 #Dump the loaded BSON to valid JSON
 from bson import json_util
@@ -55,7 +56,7 @@ def fetch_one_song(id:str):
     return json.loads(json_util.dumps(document))
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-# Products functions. Post, update and delete
+# Envent functions. Post and delete
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
 #Post an event, generate an uuid and push to parthner and products
@@ -77,6 +78,33 @@ def remove_event(id:str,uuid:str):
     category_bdd[0].update_one({"id_ad":uuid},{"$set":{"deprecated":True,"status_ad":False}})
     category_bdd[1].update_one({'_id':bson.ObjectId(id)},{"$pull":{"ads":uuid}})
     return True
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Garage functions. Post and delete
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+#Post garage item, generate an uuid and push to parthner and products
+def create_garage_item_ad_category(model_garage:ModelGarage,
+                                        id_parthner:str
+                                        ):
+    Validator.is_valid(id_parthner)
+    category_bdd = select_db()
+    is_ad = str(uuid.uuid4())
+    model_garage["id_ad"] = is_ad
+    category_bdd[3].insert_one(dict(model_garage)) #add to garage products
+    category_bdd[1].update_one({"_id":bson.ObjectId(id_parthner)},{"$push":{"garage":is_ad}}) # add to ads category
+    return model_garage
+
+#Delete garage item, Integrate to category ads
+def remove_garage_item(id:str,uuid:str):
+    Validator.is_valid(id)
+    category_bdd = select_db()
+    category_bdd[3].update_one({"id_ad":uuid},{"$set":{"deprecated":True,"status_ad":False}})
+    category_bdd[1].update_one({'_id':bson.ObjectId(id)},{"$pull":{"garage":uuid}})
+    return True
+
+
+
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Songs functions. Post, update and delete
