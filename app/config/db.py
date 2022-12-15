@@ -50,12 +50,19 @@ def fetch_one_ad( _id1:str):
     document = category[0].find_one({"_id":bson.ObjectId(_id1)})
     return json.loads(json_util.dumps(document))
 
-#Retrieve an ad using ID SONG USING PATH PARAMETER
+#Retrieve a song using ID SONG USING PATH PARAMETER
 def fetch_one_song(id:str):
     Validator.is_valid(id)
     category = select_db()
     document = category[2].find_one({"_id":bson.ObjectId(id)})
     return json.loads(json_util.dumps(document))
+
+#Retrieve all ads category Body Request
+def fetch_all_category_garage(category_:str):
+    category = select_db()
+    document = category[3].find({"category":category_,"status_ad":True,"deprecated":False},{"name_ad":1,"phone":1, "city_ad":1, "full_price":1, "hood_ad":1, "city_ad":1, "description":1, "full_price":1, "link_contact":1})
+    return json.loads(json_util.dumps(document))
+
 
 # =============================================
 # Parthner functions. Upload file and delete
@@ -203,6 +210,12 @@ def get_parthner_info_bd (email:str):
 def fetch_all_ads_parthner(email:str):
     category = select_db()
     document = category[0].find({"email":email, "deprecated":False})
+    return json.loads(json_util.dumps(document))
+
+#Retrieve all ads Parthner email path parameter
+def fetch_all_garage_parthner(email:str):
+    category = select_db()
+    document = category[3].find({"email":email, "deprecated":False})
     return json.loads(json_util.dumps(document))
 
 
