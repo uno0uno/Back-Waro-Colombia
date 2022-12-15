@@ -58,8 +58,8 @@ def fetch_one_song(id:str):
 # Products functions. Post, update and delete
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
-#Post a product, generate an uuid and push to parthner and products
-def create_product_and_ad_category(model_ad:ModelAd,
+#Post an event, generate an uuid and push to parthner and products
+def create_event_and_ad_category(model_ad:ModelAd,
                                         id_parthner:str
                                         ):
     Validator.is_valid(id_parthner)
@@ -70,8 +70,8 @@ def create_product_and_ad_category(model_ad:ModelAd,
     category_bdd[1].update_one({"_id":bson.ObjectId(id_parthner)},{"$push":{"ads":is_ad}}) # add to ads category
     return model_ad
 
-#Delete a product, Integrate to category ads
-def remove_product(id:str,uuid:str):
+#Delete an event, Integrate to category ads
+def remove_event(id:str,uuid:str):
     Validator.is_valid(id)
     category_bdd = select_db()
     category_bdd[0].update_one({"id_ad":uuid},{"$set":{"deprecated":True,"status_ad":False}})

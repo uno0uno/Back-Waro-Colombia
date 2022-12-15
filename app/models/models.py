@@ -108,7 +108,7 @@ class ModelAd(BaseModel):  #ads public generic parthner
         artist:Optional[list] = Field( None, #artist
                             example=["Dj Cas", "Tres Coronas", "La Ettnia"]
                             )
-                            
+
         imgHash: str = Field(
                             ...,
                             max_length=360,
@@ -134,7 +134,6 @@ class Payments(BaseModel): #payments public generic parthner
         email:EmailStr = Field( ..., #Email Parthner
                             example="hola@warocol.com"
                             )                
-
 class ModelSong(BaseModel):  #song public generic parthner
         
         songHash: str = Field(
