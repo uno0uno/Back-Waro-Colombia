@@ -10,6 +10,7 @@ from app.users.routers.user_router import user_router_app
 from app.Event.routers.Events import event_router_app
 from app.Songs.routers.songs import songs_router_app
 from app.garage.garage_router import garage_router_app
+from app.upload_file.upload_file import upload_file_app
 
 import uvicorn
 
@@ -20,7 +21,7 @@ app.include_router(parthner_router_app)
 app.include_router(event_router_app)
 app.include_router(songs_router_app)
 app.include_router(garage_router_app)
-
+app.include_router(upload_file_app)
 # ============================================================
 # MIDDLEWARE TO CONECT
 # ============================================================
