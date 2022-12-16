@@ -11,7 +11,6 @@ import bson
 from app.models.models import ParthnerLogin
 from app.models.models import ParthnerInfoUpdate
 from app.models.models import ParthnerInfo
-from app.models.models import ModelAd
 from app.models.models import ModelGarage
 
 #Dump the loaded BSON to valid JSON
@@ -36,27 +35,14 @@ from app.auth.hash_class import Hasher
 # User functions. Fetch a single product and categories product
 # =============================================================
 
-#Retrieve all ads category Body Request
-def fetch_all_category_ads(category_:str):
-    category = select_db()
-    document = category[0].find({"category":category_,"status_ad":True,"deprecated":False},{"name_ad":1,"phone":1, "city_ad":1, "full_price":1, "hood_ad":1, "city_ad":1, "description":1, "full_price":1, "link_contact":1})
-    return json.loads(json_util.dumps(document))
-
-#Retrieve an ad using ID AD USING PATH PARAMETER
-def fetch_one_ad( _id1:str):
-    Validator.is_valid(_id1)
-    category = select_db()
-    document = category[0].find_one({"_id":bson.ObjectId(_id1)})
-    return json.loads(json_util.dumps(document))
-
-#Retrieve an ad using ID AD USING PATH PARAMETER
+#Retrieve garage item using ID AD USING PATH PARAMETER
 def fetch_one_item_garage( _id1:str):
     Validator.is_valid(_id1)
     category = select_db()
     document = category[3].find_one({"_id":bson.ObjectId(_id1)})
     return json.loads(json_util.dumps(document))
 
-#Retrieve all ads category Body Request
+#Retrieve all garage items category Body Request
 def fetch_all_category_garage(category_:str):
     category = select_db()
     document = category[3].find({"category":category_,"status_ad":True,"deprecated":False},{"name_ad":1,"phone":1, "city_ad":1, "full_price":1, "hood_ad":1, "city_ad":1, "description":1, "full_price":1, "link_contact":1})
@@ -83,30 +69,6 @@ def remove_file_bd(id:str,hash:str):
     return response
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-# Envent functions. Post and delete
-# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-
-#Post an event, generate an uuid and push to parthner and products
-def create_event_and_ad_category(model_ad:ModelAd,
-                                        id_parthner:str
-                                        ):
-    Validator.is_valid(id_parthner)
-    category_bdd = select_db()
-    is_ad = str(uuid.uuid4())
-    model_ad["id_ad"] = is_ad
-    category_bdd[0].insert_one(dict(model_ad)) #add to products
-    category_bdd[1].update_one({"_id":bson.ObjectId(id_parthner)},{"$push":{"ads":is_ad}}) # add to ads category
-    return model_ad
-
-#Delete an event, Integrate to category ads
-def remove_event(id:str,uuid:str):
-    Validator.is_valid(id)
-    category_bdd = select_db()
-    category_bdd[0].update_one({"id_ad":uuid},{"$set":{"deprecated":True,"status_ad":False}})
-    category_bdd[1].update_one({'_id':bson.ObjectId(id)},{"$pull":{"ads":uuid}})
-    return True
-
-# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Garage functions. Post and delete
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
@@ -129,29 +91,6 @@ def remove_garage_item(id:str,uuid:str):
     category_bdd[3].update_one({"id_ad":uuid},{"$set":{"deprecated":True,"status_ad":False}})
     category_bdd[1].update_one({'_id':bson.ObjectId(id)},{"$pull":{"garage":uuid}})
     return True
-
-
-
-
-# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-# Songs functions. Post, update and delete
-# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-
-#New song Dowland
-def new_dowland_song_db(id_song:str, number_dowlands:int):
-
-    Validator.is_valid(id_song)
-    category_bdd = select_db()
-    category_bdd[2].update_one({"_id":bson.ObjectId(id_song)},{"$set":{"dowlands":number_dowlands}}) # add to ads category
-    return "ok"
-
-#New song Play
-def new_play_song_db(id_song:str, number_plays:int):
-
-    Validator.is_valid(id_song)
-    category_bdd = select_db()
-    category_bdd[2].update_one({"_id":bson.ObjectId(id_song)},{"$set":{"play":number_plays}}) # add to ads category
-    return "ok"
 
 
 # =============================================
@@ -193,13 +132,7 @@ def get_parthner_info_bd (email:str):
     document = category_bdd[1].find_one({"email":email},{"password":0})
     return json.loads(json_util.dumps(document))
 
-#Retrieve all ads Parthner email path parameter
-def fetch_all_ads_parthner(email:str):
-    category = select_db()
-    document = category[0].find({"email":email, "deprecated":False})
-    return json.loads(json_util.dumps(document))
-
-#Retrieve all ads Parthner email path parameter
+#Retrieve all garage items Parthner email path parameter
 def fetch_all_garage_parthner(email:str):
     category = select_db()
     document = category[3].find({"email":email, "deprecated":False})
