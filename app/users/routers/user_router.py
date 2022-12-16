@@ -7,7 +7,8 @@ from fastapi import Body, Query, Path, Form, Header, Cookie, UploadFile, File
 
 #DataBase encoders
 from app.config.db import fetch_one_ad,fetch_all_category_ads
-from app.config.db import fetch_one_song, fetch_all_category_garage
+from app.config.db import fetch_all_category_garage
+from app.config.db import fetch_one_item_garage
 
 # ============================================================
 # Definitions Router:
@@ -52,6 +53,21 @@ def get_ads(
             return response
         raise HTTPException(404,"Not found")
 
+# Get garage item from category using id
+# ==========================
+@user_router_app.get(
+        "/getgarageitem/{_id1}",
+        status_code=status.HTTP_200_OK,
+        summary="Single garage product"  
+        )
+def get_one_garage_item(
+        _id1:str = Path(...,example="63543e411099e408d2c4e439", description="Object _id Ad")
+        ):
+        response = fetch_one_item_garage(_id1) 
+        if response:
+            return response
+        raise HTTPException(404,"Not found")
+
 # Get all garage sale from category
 # =============================
 @user_router_app.get("/getgarage/{category_}",
@@ -66,18 +82,4 @@ def get_garage_item(
             return response
         raise HTTPException(404,"Not found")
 
-# Get a song from category using Object Id
-# ==========================
-@user_router_app.get(
-        "/getsong/{id}",
-        status_code=status.HTTP_200_OK,
-        summary="Single song"  
-        )
-def get_song(
-        id:str = Path(...,example="63810b0569f2c6a4b77948f3", description="Object _id Song")
-        ):
-        response = fetch_one_song(id) 
-        if response:
-            return response
-        raise HTTPException(404,"Not found")
 

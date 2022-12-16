@@ -51,12 +51,6 @@ class ModelAd(BaseModel):  #ads public generic parthner
         email:EmailStr = Field( ..., #Email Parthner
                             example="hola@warocol.com"
                             )
-        link_contact:Optional[str] = Field(
-                            None,#phone Parthner
-                            max_length=100,
-                            min_length=1,
-                            example="https://chat.whatsapp.com/EED536nR8Et2Nh0DCRDsGs"
-                            )
         full_price: int = Field(
                                 ...,
                                 example=50000
@@ -133,76 +127,7 @@ class Payments(BaseModel): #payments public generic parthner
                             )   
         email:EmailStr = Field( ..., #Email Parthner
                             example="hola@warocol.com"
-                            )                
-class ModelSong(BaseModel):  #song public generic parthner
-        
-        songHash: str = Field(
-                            ...,
-                            max_length=360,
-                            min_length=1,
-                            example="Qmb5p6W7o3BXecXM8dvW8ExhUgJqnUf7QWfDjGdK398RiD"
-                            )
-        imgHash: str = Field(
-                            ...,
-                            max_length=360,
-                            min_length=1,
-                            example="QmUhkW4mEaJyGWqVvBSrBXEp1ZzSDi548xcADWpn4S2GhP"
-                            )
-
-        nameSong: str = Field(
-                            ...,
-                            max_length=360,
-                            min_length=1,
-                            example="La Junta"
-                            )
-
-        nameArtist: str = Field(
-                            ...,
-                            min_length=1,
-                            max_length=30, 
-                            example="Tres Coronas"
-                            )
-        
-        genre: str = Field(
-                            ...,
-                            min_length=1,
-                            max_length=30, 
-                            example="Hip-Hop"
-                            )
-                                    
-        dowlandType: str = Field(
-                            ...,
-                            min_length=1,
-                            max_length=30, 
-                            example="Descarga gratis"
-                            )
-        dowlands:int = Field(
-                    ...,#phone Parthner
-                    example=0
-                    )
-        play:int = Field(
-                    ...,#phone Parthner
-                    example=0
-                    )
-
-        status_ad:Optional[bool] = Field(None, example=False)
-
-        deprecated: Optional[bool] = Field(None, example=False)
-
-        ONErpm:str = Field(
-                    ...,#phone Parthner
-                    example="https://onerpm.link/LaJunta"
-                    )
-        youtube:str = Field(
-                    ...,#phone Parthner
-                    example="https://youtu.be/e8XrZ3g0qfY"
-                    )
-        description: str = Field(
-                            ...,
-                            max_length=1000,
-                            min_length=1,
-                            example="Esta es una descripcion corte del producto "
-                            )        
+                            )                     
 class ModelGarage(BaseModel):  #garage public generic parthner
     email:EmailStr = Field( ..., #Email Parthner
                             example="hola@warocol.com"

@@ -12,7 +12,6 @@ from app.models.models import ParthnerLogin
 from app.models.models import ParthnerInfoUpdate
 from app.models.models import ParthnerInfo
 from app.models.models import ModelAd
-from app.models.models import ModelSong
 from app.models.models import ModelGarage
 
 #Dump the loaded BSON to valid JSON
@@ -50,11 +49,11 @@ def fetch_one_ad( _id1:str):
     document = category[0].find_one({"_id":bson.ObjectId(_id1)})
     return json.loads(json_util.dumps(document))
 
-#Retrieve a song using ID SONG USING PATH PARAMETER
-def fetch_one_song(id:str):
-    Validator.is_valid(id)
+#Retrieve an ad using ID AD USING PATH PARAMETER
+def fetch_one_item_garage( _id1:str):
+    Validator.is_valid(_id1)
     category = select_db()
-    document = category[2].find_one({"_id":bson.ObjectId(id)})
+    document = category[3].find_one({"_id":bson.ObjectId(_id1)})
     return json.loads(json_util.dumps(document))
 
 #Retrieve all ads category Body Request
@@ -137,18 +136,6 @@ def remove_garage_item(id:str,uuid:str):
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Songs functions. Post, update and delete
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-
-#Post a product, generate an uuid and push to parthner and products
-def create_song_and_ad_category(model_song:ModelSong,
-                                        id_parthner:str
-                                        ):
-    Validator.is_valid(id_parthner)
-    category_bdd = select_db()
-    is_song = str(uuid.uuid4())
-    model_song["id_ad"] = is_song
-    category_bdd[2].insert_one(dict(model_song)) #add to products
-    category_bdd[1].update_one({"_id":bson.ObjectId(id_parthner)},{"$push":{"songs":is_song}}) # add to ads category
-    return model_song
 
 #New song Dowland
 def new_dowland_song_db(id_song:str, number_dowlands:int):
