@@ -45,7 +45,7 @@ def fetch_one_item_garage( _id1:str):
 #Retrieve all garage items category Body Request
 def fetch_all_category_garage(category_:str):
     category = select_db()
-    document = category[3].find({"category":category_,"status_ad":True,"deprecated":False},{"name_ad":1,"phone":1, "city_ad":1, "full_price":1, "hood_ad":1, "city_ad":1, "description":1, "full_price":1, "link_contact":1})
+    document = category[3].find({"category":category_,"status_ad":True,"deprecated":False},{"name_ad":1, "city_ad":1, "full_price":1, "hood_ad":1, "city_ad":1, "description":1, "full_price":1, "imgHash": 1})
     return json.loads(json_util.dumps(document))
 
 
