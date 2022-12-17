@@ -66,7 +66,7 @@ class Payments(BaseModel): #payments public generic parthner
         phone:int = Field( ..., #Email Parthner
                             example="3142047013"
                             ) 
-        address:EmailStr = Field( ..., #Email Parthner
+        address:str = Field( ..., #Email Parthner
                             example="hola@warocol.com"
                             )                     
 class ModelGarage(BaseModel):  #garage public generic parthner
