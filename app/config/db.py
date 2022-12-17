@@ -12,6 +12,7 @@ from app.models.models import ParthnerLogin
 from app.models.models import ParthnerInfoUpdate
 from app.models.models import ParthnerInfo
 from app.models.models import ModelGarage
+from app.models.models import Payments
 
 #Dump the loaded BSON to valid JSON
 from bson import json_util
@@ -28,6 +29,25 @@ from app.auth.jwt_handler import signJWT
 
 #Hash password
 from app.auth.hash_class import Hasher
+
+
+# =============================================================
+# payments functions. new and fetch all payments
+# =============================================================
+
+#Retrieve order item using ID AD USING PATH PARAMETER
+def new_order_bd( payments:Payments ):
+    category_bdd = select_db()
+    category_bdd[4].insert_one(dict(payments)) #add to garage products
+    return payments
+
+
+#Retrieve all orders category Body Request
+def get_all_order_db(category_:str):
+    category = select_db()
+    document = category[4].find({})
+    return json.loads(json_util.dumps(document))
+
 
 
 

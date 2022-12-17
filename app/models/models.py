@@ -48,13 +48,13 @@ class ParthnerInfo(ParthnerInfoUpdate):  #Info Parthner
 
     garage:Optional[list] = None
 class Payments(BaseModel): #payments public generic parthner
-        title:str = Field( ..., #Name Product
-                            example="My product"
+        id_product:str = Field( ..., #Name Product
+                            example="QmUhkW4mEaJyGWqVvBSrBXEp1ZzSDi548xcADWpn4S2GhP"
                             )
-        currency_id:str = Field( ..., #Currency Payment
-                            example="COP"
+        id_parthner:str = Field( ..., #Name Product
+                            example="QmUhkW4mEaJyGWqVvBSrBXEp1ZzSDi548xcADWpn4S2GhP"
                             )
-        description:str = Field( ..., #Description Product
+        name_product:str = Field( ..., #Description Product
                             example="description product"
                             )
         quantity:int = Field( ..., #Quantity products
@@ -63,7 +63,10 @@ class Payments(BaseModel): #payments public generic parthner
         unit_price:int = Field( ..., #Amount 10000
                             example="10000"
                             )   
-        email:EmailStr = Field( ..., #Email Parthner
+        phone:int = Field( ..., #Email Parthner
+                            example="3142047013"
+                            ) 
+        address:EmailStr = Field( ..., #Email Parthner
                             example="hola@warocol.com"
                             )                     
 class ModelGarage(BaseModel):  #garage public generic parthner

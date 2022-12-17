@@ -43,7 +43,8 @@ def select_db():
     parthner = client.parthner[__category]
     songs = client.songs[__category]
     garage = client.garage[__category]
-    return [products, parthner, songs, garage]
+    payment = client.payment[__category]
+    return [products, parthner, songs, garage, payment]
 
 def Validator_email(plain_email, email_bd):
     if plain_email != email_bd : 
