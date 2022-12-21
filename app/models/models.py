@@ -113,12 +113,6 @@ class ModelGarage(BaseModel):  #garage public generic parthner
                         max_length=30,
                         example="Bogotá" 
                         )
-    hood_ad: str = Field(
-                        ...,
-                        min_length=1,
-                        max_length=30,
-                        example="Ciudad Bolivar" 
-                        )
     imgHash: str = Field(
                         ...,
                         max_length=360,
@@ -129,4 +123,11 @@ class ModelGarage(BaseModel):  #garage public generic parthner
                             None,#phone Parthner
                             example="7000"
                             )
+    status_shipping:Optional[bool] = Field(None, example=True)
+    status_pickup:Optional[bool] = Field(None, example=True)
+    saving: int = Field(
+                            ...,
+                            example=50000
+                            )
+    
 
