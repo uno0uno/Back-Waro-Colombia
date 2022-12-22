@@ -8,6 +8,7 @@ from app.config.db import create_parthner
 from app.config.db import update_parthner
 from app.config.db import get_parthner_info_bd
 from app.config.db import fetch_all_garage_parthner
+from app.config.db import fetch_all_payments
 
 #Models app Waro Colombia(Internal)
 from app.models.models import ParthnerInfoUpdate
@@ -98,6 +99,20 @@ def get_garage_parthner(
             description="Email bussines")
             ):
             response = fetch_all_garage_parthner(email) 
+            if response:
+                return response
+            raise HTTPException(404,"Not found")
+
+# Get all payments
+# =====================
+@parthner_router_app.get("/payments/",
+            status_code=status.HTTP_200_OK,
+            dependencies=[Depends(JWTBearer())],
+            tags=["Parthner bussines"],
+            summary="Get payments"
+            )
+def get_garage_parthner():
+            response = fetch_all_payments() 
             if response:
                 return response
             raise HTTPException(404,"Not found")

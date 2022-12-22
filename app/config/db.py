@@ -158,4 +158,10 @@ def fetch_all_garage_parthner(email:str):
     document = category[3].find({"email":email, "deprecated":False})
     return json.loads(json_util.dumps(document))
 
+#Retrieve all garage items Parthner email path parameter
+def fetch_all_payments():
+    category = select_db()
+    document = category[4].find()
+    return json.loads(json_util.dumps(document))
+
 
