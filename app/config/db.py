@@ -48,6 +48,13 @@ def get_all_order_db(category_:str):
     document = category[4].find({})
     return json.loads(json_util.dumps(document))
 
+#Change order status
+def change_state_order_db(id:str, state:str ):
+    Validator.is_valid(id)
+    category = select_db()
+    document = category[4].update_one({"_id":bson.ObjectId(id)},{"$set":{"state":state}})
+    return state
+
 
 
 
