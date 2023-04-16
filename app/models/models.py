@@ -10,127 +10,53 @@ from pydantic import EmailStr
 #Datetime
 import datetime
 
-# ============================================================
-# Define models, Parthners WAROCOL.COM
-# ============================================================
-class ParthnerLogin(BaseModel): #Login parthner
-    email:EmailStr = Field( ..., #Email Parthner
-                        example="hola@warocol.com"
-                        )
+# ===================================================================
+# Define models, NewProduct,NewOwner, NewSeller, NewVenue WAROCOL.COM
+# ===================================================================
 
-    password:str = Field(
-                        ...,
-                        min_length=8,
-                        max_length=64,
-                        example='password',
-                        )
-class ParthnerInfoUpdate(ParthnerLogin):  #Info Parthner
-   
-    phone:int = Field(
-                    ...,#phone Parthner
-                    example=3142047013
-                    )
+class NewProduct(BaseModel):
 
-    name_business:str = Field(
-                        ..., #Name Bussines required
-                        min_length=1,
-                        max_length=30,
-                        example="Waro Colombia"
-                        )
-
-    status_parthner:Optional[bool] = Field(None, example=True) 
-class ParthnerInfo(ParthnerInfoUpdate):  #Info Parthner
-    ads:Optional[list] = None
-
-    payments:Optional[list] = None
+    address_product:str = Field( ...,example="Cll 39 f # 68 f 64 norte") #User input
+    date_limit_product:str = Field( ...,example="2021-04-31") #User input
+    category_product:str = Field( ...,example="dancehall") #User input
+    name_product:str = Field( ...,example="Sonidero Bogotano") #User input
+    reazon_sell_product:str = Field( ...,example="Cll 39 f # 68 f 64 norte") #User input
+    inicial_bid_product:int = Field( ...,example=100) #User input
+    citie_product:str = Field( ...,example="Bogotá") #User input
+    country_product:str = Field( ...,example="Colombia") #User input
+    views_product:int = Field( ...,example=100) #Javascript Input
+    status_product:bool = Field( ...,example=False) #Javascript Input
+    available_product:bool = Field( ...,example=True) #Javascript Input
+    id_seller:str = Field( ...,example="2021-04-31") #Javascript Input
+    id_venue:str = Field( ...,example="_Id-object") #Javascript Input #OPTIONAL
+    id_owner:str = Field( ...,example="_Id-object") #Javascript Input #OPTIONAL
+    artist_product_event:list = Field(...) #Javascript Input #OPTIONAL
     
-    songs:Optional[list] = None
+class NewOwner(BaseModel):
 
-    garage:Optional[list] = None
-class Payments(BaseModel): #payments public generic parthner
-        id_product:str = Field( ..., #Name Product
-                            example="QmUhkW4mEaJyGWqVvBSrBXEp1ZzSDi548xcADWpn4S2GhP"
-                            )
-        id_parthner:str = Field( ..., #Name Product
-                            example="QmUhkW4mEaJyGWqVvBSrBXEp1ZzSDi548xcADWpn4S2GhP"
-                            )
-        name_product:str = Field( ..., #Description Product
-                            example="description product"
-                            )
-        quantity:int = Field( ..., #Quantity products
-                            example="1"
-                            )
-        unit_price:int = Field( ..., #Amount 10000
-                            example="10000"
-                            )   
-        phone:int = Field( ..., #Email Parthner
-                            example="3142047013"
-                            ) 
-        address:str = Field( ..., #Email Parthner
-                            example="hola@warocol.com"
-                            )
-        state:str = Field( ..., #Email Parthner
-                            example="hola@warocol.com"
-                            )                      
-class ModelGarage(BaseModel):  #garage public generic parthner
-    email:EmailStr = Field( ..., #Email Parthner
-                            example="hola@warocol.com"
-                            )
-    full_price: int = Field(
-                            ...,
-                            example=50000
-                            )
-    description: str = Field(
-                            ...,
-                            max_length=1000,
-                            min_length=1,
-                            example="Esta es una descripcion corte del producto "
-                            )
+    name_owner_organiser:str = Field( ...,example="Anderson Arévalo") #User input
+    description_owner:str = Field( ...,example="100 years experience") #User input
+    profile_image_owner:str = Field( ...,example="hash") #User input
 
-    category: str = Field(
-                        ...,
-                        min_length=1,
-                        max_length=30, 
-                        example="Eventos"
-                        )
+class NewSeller(BaseModel):
 
-    status_ad:Optional[bool] = Field(None, example=True)
+    name_seller:str = Field( ...,example="Anderson Arévalo") #User input
+    email_seller:str = Field( ...,example="hola@warocol.com") #User input
+    phone_seller:int = Field( ...,example="3142047013") #User input
+    profile_image_seller:str = Field( ...,example="hash") #User input
+    email_verification_seller:bool = Field( ...,example=False) #Python #OPTIONAL
+    phone_verification_seller:bool = Field( ...,example=False) #Python #OPTIONAL
+    kyc_verification_seller:bool = Field( ...,example=False) #Python #OPTIONAL
 
-    deprecated: Optional[bool] = Field(None, example=False)
+class NewVenue(BaseModel):
 
-    name_ad: str = Field(
-                        ...,
-                        min_length=1,
-                        max_length=90,
-                        example="Sonidero Bogotano" 
-                        )
-    name_business:str = Field(
-                        ..., #Name Bussines required
-                        min_length=1,
-                        max_length=30,
-                        example="Waro Colombia"
-                        )
-    city_ad: str = Field(
-                        ...,
-                        min_length=1,
-                        max_length=30,
-                        example="Bogotá" 
-                        )
-    imgHash: str = Field(
-                        ...,
-                        max_length=360,
-                        min_length=1,
-                        example="QmUhkW4mEaJyGWqVvBSrBXEp1ZzSDi548xcADWpn4S2GhP"
-                        )
-    shipping:Optional[int] = Field(
-                            None,#phone Parthner
-                            example="7000"
-                            )
-    status_shipping:Optional[bool] = Field(None, example=True)
-    status_pickup:Optional[bool] = Field(None, example=True)
-    saving: int = Field(
-                            ...,
-                            example=50000
-                            )
-    
+    name_venue:str = Field( ...,example="Def Jamaica") #User input
+    description_venue:str = Field( ...,example="Suacha con puestos") #User input
+    profile_image_venue:int = Field( ...,example="hash") #User input
+
+
+
+
+
+
 

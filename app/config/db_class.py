@@ -41,33 +41,17 @@ class Validator(object):
         raise HTTPException(422,"Unprocessable Entity")
 
 def select_db():
-    __category = "MagicV1"
+    __category = "MagicV2.0"
     products = client.products[__category]
-    parthner = client.parthner[__category]
-    songs = client.songs[__category]
-    garage = client.garage[__category]
-    payment = client.payment[__category]
-    return [products, parthner, songs, garage, payment]
+    owner = client.owner[__category]
+    seller = client.seller[__category]
+    return [products,owner,seller]
 
 def Validator_email(plain_email, email_bd):
     if plain_email != email_bd : 
         result = True
         return result
     raise HTTPException(409,"Unauthorized")
-
-def infura_file(img_ad:UploadFile):
-        files = {'file': img_ad.file}           
-        if img_ad.content_type not in ["image/png", "image/jpg", "image/jpeg"]:
-            raise HTTPException(409,"File extension not allowed")
-        response = requests.post(END_POINT_INFURA + '/api/v0/add', files=files, auth=(PROJECT_ID_INFURA, PROJECT_SECRET_INFURA))
-        hash = response.text.split(",")[1].split(":")[1].replace('"','')
-        return hash
-        
-
-def infura_fire_delete(hash:str):
-    params = {'arg': hash}
-    response3 = requests.post(END_POINT_INFURA + '/api/v0/pin/rm', params=params, auth=(PROJECT_ID_INFURA, PROJECT_SECRET_INFURA))
-    return response3
 
 
 
